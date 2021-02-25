@@ -1,0 +1,125 @@
+Basic List Comprehension
+=============================================================
+l1 = ['a', 'b', 'c', 'd', 'e', 'f']
+
+[i for i in l1]
+
+['a', 'b', 'c', 'd', 'e', 'f']
+
+
+If Statement
+-------------------------------------------------------------	
+l1 = ['a', 'b', 'c', 'd', 'e', 'f']
+ 
+Filter the list if the element is "a" 
+ 
+[i for i in l1 if i!="a"]
+
+['b', 'c', 'd', 'e', 'f']
+
+
+Transform the elements of a list
+-------------------------------------------------------------	
+l1 = ['a', 'b', 'c', 'd', 'e', 'f']
+ 
+It makes uppercase the letters
+ 
+[i.upper() for i in l1]
+
+['A', 'B', 'C', 'D', 'E', 'F']
+
+
+If Else Statement
+-------------------------------------------------------------	
+l1 = ['a', 'b', 'c', 'd', 'e', 'f']
+ 
+#It makes uppercase the letters except "a"
+ 
+[i.upper() if i!="a" else i for i in l1]
+
+['a', 'B', 'C', 'D', 'E', 'F']
+
+
+Advanced List Comprehension
+=============================================================
+
+Use elements of 2 lists
+-------------------------------------------------------------	
+l1 = ['a', 'b']
+l2 = [1, 2]
+ 
+#It combines the elements of the l1 and l2
+
+[i+str(j) for i in l1 for j in l2]
+
+['a1', 'a2', 'b1', 'b2']
+
+
+Example: Get the email addresses from a list of domains
+-------------------------------------------------------------	
+
+l1 = ["billy@gmail.com", "george@hotmail.com","www.billy.com","python.com", "mike@predictivehacks.com"]
+domains = ['gmail.com',"hotmail.com"]
+ 
+#It searches for email addresses with domains that are in the list "domains"
+
+[i for i in l1 for j in domains if j in str(i)]
+
+['billy@gmail.com', 'george@hotmail.com']
+
+
+Create a list of tuples
+-------------------------------------------------------------	
+l1 = ["billy","mike","george","italy","greece"]
+ 
+#It creates list of tuples containing
+#the elements of the list with their number of characters
+ 
+[(i,len(i)) for i in l1 ]
+
+[('billy', 5), ('mike', 4), ('george', 6), ('italy', 5), ('greece', 6)]
+
+
+Interact with other elements of the list
+-------------------------------------------------------------	
+l1 = [1, 2, 3, 6, 0, 1, 4, 5, 9, 0, 1, 4, 5, 0]
+ 
+#It creates a list with items the numbers that are before 0 in l2
+
+[l1[i-1] for i,j in enumerate(l1) if j==0]
+
+[6, 9, 5]
+
+
+Dict Comprehension
+=============================================================
+
+Create a dictionary from a list
+-------------------------------------------------------------	
+l1 = ['a', 'b', 'c', 'd', 'e', 'f']
+ 
+#It creates a dictionary
+ 
+{i:i for i in l1}
+
+{'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e', 'f': 'f'}
+
+
+#It creates a dictionary enumerating every item of the list
+-------------------------------------------------------------	
+l1 = ['a', 'b', 'c', 'd', 'e', 'f']
+ 
+{i:j for i,j in enumerate(l1)}
+
+{0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f'}
+
+
+Iterate over keys & values of a dictionary
+-------------------------------------------------------------	
+d1 = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f'}
+ 
+#It creates a dictionary adding 1  to the keys of d1
+
+{key+1:value for key , value in d1.items()}
+
+{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f'}
