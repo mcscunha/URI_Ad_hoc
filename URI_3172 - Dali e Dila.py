@@ -8,6 +8,7 @@ transp_max = int(linhas[1])
 linhas = list(map(int, input().split()))
 
 '''
+## Sem sucesso
 dali_inicia = True
 pilha = 0
 while pilha < pilhas:
@@ -18,6 +19,7 @@ while pilha < pilhas:
 print('Dila' if dali_inicia else 'Dali')
 '''
 
+## Sem sucesso
 total_brinq = sum(linhas)
 vezes = total_brinq // transp_max
 resto = total_brinq % transp_max
