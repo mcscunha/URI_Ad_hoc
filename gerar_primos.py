@@ -3,7 +3,8 @@ from math import sqrt, ceil
 
 def checkPrime(num, baseList):    
     for p in baseList:
-        if (p > ceil(sqrt(num))): break
+        if (p > ceil(sqrt(num))): 
+            break
 
         if num % p == 0:
             return False
