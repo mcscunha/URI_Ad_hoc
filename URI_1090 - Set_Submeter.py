@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from time import time
+inicio = time()
+
 # Numeros e simbolos diferentes ---> Diagonal da matriz a direita
 def diagonal_direita(cartas_mesa):
     cartas_mesa_transposta = list(zip(*cartas_mesa))
@@ -107,19 +110,23 @@ def mesma_coluna(cartas_mesa):
                 cartas_mesa[j][i] -= op
     return soma
 
+
 simbolo = {
     'c': 0, 
     'q': 1, 
     't': 2, 
-    }
+}
 numero = {
     'u': 0, 
     'd': 1, 
     't': 2, 
     }
+with open('1090_valores.txt', 'r') as f:
+    linhas = f.readlines()
+linha = 0
 
 while True:
-    cartas = int(input())
+    cartas = int(linhas[linha])
     
     if cartas == 0:
         break
@@ -134,9 +141,9 @@ while True:
 
     # Completar as variaveis
     for carta in range(cartas):
-        n = input().split(' ')
+        linha += 1
+        n = linhas[linha].split(' ')
         original[simbolo[n[1][0]]][numero[n[0][0]]] += 1
-
 
     
     # Analisando...
@@ -184,3 +191,6 @@ while True:
             , tentativa_10
        )
     )
+    linha += 1
+
+print(f'Tempo total: {(time() - inicio):0.2f} segundos')

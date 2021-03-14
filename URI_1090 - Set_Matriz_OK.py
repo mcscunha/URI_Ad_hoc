@@ -79,9 +79,9 @@ def descartar_num_diferentes(cartas_mesa, num_cartas, simbolo):
 
 
 def descartar(cartas_mesa, num_cartas, numero):
-    cartas_mesa['C'][numero[0]] -= num_cartas
-    cartas_mesa['Q'][numero[1]] -= num_cartas
-    cartas_mesa['T'][numero[2]] -= num_cartas
+    cartas_mesa[0][numero[0]] -= num_cartas
+    cartas_mesa[1][numero[1]] -= num_cartas
+    cartas_mesa[2][numero[2]] -= num_cartas
     return num_cartas
 
 
@@ -90,21 +90,23 @@ def diagonal_direita(cartas_mesa):
     print('Regra da Diagonal - Direita')
     soma = 0
     if (
-        (sum(cartas_mesa['C']) == 0) or 
-        (sum(cartas_mesa['T']) == 0) or
-        (cartas_mesa['C'][0] == cartas_mesa['Q'][0] == cartas_mesa['T'][0] == 0) or
-        (cartas_mesa['C'][2] == cartas_mesa['Q'][2] == cartas_mesa['T'][2] == 0)
+        ((cartas_mesa[0][0] + cartas_mesa[0][1] + cartas_mesa[0][2]) == 0) or 
+        ((cartas_mesa[1][0] + cartas_mesa[1][1] + cartas_mesa[1][2]) == 0) or
+        ((cartas_mesa[2][0] + cartas_mesa[2][1] + cartas_mesa[2][2]) == 0) or
+        ((cartas_mesa[0][0] + cartas_mesa[1][0] + cartas_mesa[2][0]) == 0) or
+        ((cartas_mesa[0][1] + cartas_mesa[1][1] + cartas_mesa[2][1]) == 0) or
+        ((cartas_mesa[0][2] + cartas_mesa[1][2] + cartas_mesa[2][2]) == 0)
     ):
-        return soma
+        return 0
     else:
         # Positiva (diagonal a direita)
-        op = min(cartas_mesa['C'][0], cartas_mesa['Q'][1], cartas_mesa['T'][2])
+        op = min(cartas_mesa[0][0], cartas_mesa[1][1], cartas_mesa[2][2])
         if op: 
             soma += descartar(cartas_mesa, op, [0, 1, 2])
-        op = min(cartas_mesa['C'][1], cartas_mesa['Q'][2], cartas_mesa['T'][0])
+        op = min(cartas_mesa[0][1], cartas_mesa[1][2], cartas_mesa[2][0])
         if op: 
             soma += descartar(cartas_mesa, op, [1, 2, 0])
-        op = min(cartas_mesa['C'][2], cartas_mesa['Q'][0], cartas_mesa['T'][1])
+        op = min(cartas_mesa[0][2], cartas_mesa[1][0], cartas_mesa[2][1])
         if op: 
             soma += descartar(cartas_mesa, op, [2, 0, 1])
     return soma
@@ -115,21 +117,23 @@ def diagonal_esquerda(cartas_mesa):
     print('Regra da Diagonal - Negativa')
     soma = 0
     if (
-        (sum(cartas_mesa['C']) == 0) or 
-        (sum(cartas_mesa['T']) == 0) or
-        (cartas_mesa['C'][0] == cartas_mesa['Q'][0] == cartas_mesa['T'][0] == 0) or
-        (cartas_mesa['C'][2] == cartas_mesa['Q'][2] == cartas_mesa['T'][2] == 0)
+        ((cartas_mesa[0][0] + cartas_mesa[0][1] + cartas_mesa[0][2]) == 0) or 
+        ((cartas_mesa[1][0] + cartas_mesa[1][1] + cartas_mesa[1][2]) == 0) or
+        ((cartas_mesa[2][0] + cartas_mesa[2][1] + cartas_mesa[2][2]) == 0) or
+        ((cartas_mesa[0][0] + cartas_mesa[1][0] + cartas_mesa[2][0]) == 0) or
+        ((cartas_mesa[0][1] + cartas_mesa[1][1] + cartas_mesa[2][1]) == 0) or
+        ((cartas_mesa[0][2] + cartas_mesa[1][2] + cartas_mesa[2][2]) == 0)
     ):
-        return soma
+        return 0
     else:
         # Negativa (diagonal a esquerda)
-        op = min(cartas_mesa['C'][2], cartas_mesa['Q'][1], cartas_mesa['T'][0])
+        op = min(cartas_mesa[0][2], cartas_mesa[1][1], cartas_mesa[2][0])
         if op: 
             soma += descartar(cartas_mesa, op, [2, 1, 0])
-        op = min(cartas_mesa['C'][0], cartas_mesa['Q'][2], cartas_mesa['T'][1])
+        op = min(cartas_mesa[0][0], cartas_mesa[1][2], cartas_mesa[2][1])
         if op: 
             soma += descartar(cartas_mesa, op, [0, 2, 1])
-        op = min(cartas_mesa['C'][1], cartas_mesa['Q'][0], cartas_mesa['T'][2])
+        op = min(cartas_mesa[0][1], cartas_mesa[1][0], cartas_mesa[2][2])
         if op: 
             soma += descartar(cartas_mesa, op, [1, 0, 2])
     return soma
@@ -139,32 +143,32 @@ def diagonal_esquerda(cartas_mesa):
 def trio_repetido(cartas_mesa):
     print('Regra do Trio de Cartas')
     soma = 0
-    op = cartas_mesa['C'][0] // 3
-    cartas_mesa['C'][0] -= op * 3
+    op = cartas_mesa[0][0] // 3
+    cartas_mesa[0][0] -= op * 3
     soma += op
-    op = cartas_mesa['C'][1] // 3
-    cartas_mesa['C'][1] -= op * 3
+    op = cartas_mesa[0][1] // 3
+    cartas_mesa[0][1] -= op * 3
     soma += op
-    op = cartas_mesa['C'][2] // 3
-    cartas_mesa['C'][2] -= op * 3
+    op = cartas_mesa[0][2] // 3
+    cartas_mesa[0][2] -= op * 3
     soma += op
-    op = cartas_mesa['Q'][0] // 3
-    cartas_mesa['Q'][0] -= op * 3
+    op = cartas_mesa[1][0] // 3
+    cartas_mesa[1][0] -= op * 3
     soma += op
-    op = cartas_mesa['Q'][1] // 3
-    cartas_mesa['Q'][1] -= op * 3
+    op = cartas_mesa[1][1] // 3
+    cartas_mesa[1][1] -= op * 3
     soma += op
-    op = cartas_mesa['Q'][2] // 3
-    cartas_mesa['Q'][2] -= op * 3
+    op = cartas_mesa[1][2] // 3
+    cartas_mesa[1][2] -= op * 3
     soma += op
-    op = cartas_mesa['T'][0] // 3
-    cartas_mesa['T'][0] -= op * 3
+    op = cartas_mesa[2][0] // 3
+    cartas_mesa[2][0] -= op * 3
     soma += op
-    op = cartas_mesa['T'][1] // 3
-    cartas_mesa['T'][1] -= op * 3
+    op = cartas_mesa[2][1] // 3
+    cartas_mesa[2][1] -= op * 3
     soma += op
-    op = cartas_mesa['T'][2] // 3
-    cartas_mesa['T'][2] -= op * 3
+    op = cartas_mesa[2][2] // 3
+    cartas_mesa[2][2] -= op * 3
     soma += op
     return soma
 
@@ -173,15 +177,15 @@ def trio_repetido(cartas_mesa):
 def mesma_linha(cartas_mesa):
     print('Regra da Mesma Linha')
     soma = 0
-    if (cartas_mesa['C'][0] and cartas_mesa['C'][1] and cartas_mesa['C'][2]):
-        op = min(cartas_mesa['C'][0], cartas_mesa['C'][1], cartas_mesa['C'][2])
-        soma += descartar_num_diferentes(cartas_mesa, op, 'C')
-    if (cartas_mesa['Q'][0] and cartas_mesa['Q'][1] and cartas_mesa['Q'][2]):
-        op = min(cartas_mesa['Q'][0], cartas_mesa['Q'][1], cartas_mesa['Q'][2])
-        soma += descartar_num_diferentes(cartas_mesa, op, 'Q')
-    if (cartas_mesa['T'][0] and cartas_mesa['T'][1] and cartas_mesa['T'][2]):
-        op = min(cartas_mesa['T'][0], cartas_mesa['T'][1], cartas_mesa['T'][2])
-        soma += descartar_num_diferentes(cartas_mesa, op, 'T')
+    if (cartas_mesa[0][0] and cartas_mesa[0][1] and cartas_mesa[0][2]):
+        op = min(cartas_mesa[0][0], cartas_mesa[0][1], cartas_mesa[0][2])
+        soma += descartar_num_diferentes(cartas_mesa, op, 0)
+    if (cartas_mesa[1][0] and cartas_mesa[1][1] and cartas_mesa[1][2]):
+        op = min(cartas_mesa[1][0], cartas_mesa[1][1], cartas_mesa[1][2])
+        soma += descartar_num_diferentes(cartas_mesa, op, 1)
+    if (cartas_mesa[2][0] and cartas_mesa[2][1] and cartas_mesa[2][2]):
+        op = min(cartas_mesa[2][0], cartas_mesa[2][1], cartas_mesa[2][2])
+        soma += descartar_num_diferentes(cartas_mesa, op, 2)
     return soma
 
 
@@ -189,176 +193,177 @@ def mesma_coluna(cartas_mesa):
     print('Regra da Mesma Coluna')
     soma = 0
     for i in range(3):
-        if (cartas_mesa['C'][i] and cartas_mesa['Q'][i] and cartas_mesa['T'][i]):
-            op = min(cartas_mesa['C'][i], cartas_mesa['Q'][i], cartas_mesa['T'][i])
-            cartas_mesa['C'][i] -= op
-            cartas_mesa['Q'][i] -= op
-            cartas_mesa['T'][i] -= op
+        if (cartas_mesa[0][i] and cartas_mesa[1][i] and cartas_mesa[2][i]):
+            op = min(cartas_mesa[0][i], cartas_mesa[1][i], cartas_mesa[2][i])
+            cartas_mesa[0][i] -= op
+            cartas_mesa[1][i] -= op
+            cartas_mesa[2][i] -= op
             soma += op
     return soma
 
 
-with open('1090_valores_1.txt', 'r') as f:
+from time import time
+inicio = time()
+
+with open('1090_valores.txt', 'r') as f:
     linhas = f.readlines()
-
-
 linha = 0
+
+
 while True:
     cartas = int(linhas[linha])
-    #cartas = int(input())
     
     if cartas == 0:
         break
     
     # inicializar as variaveis
-    original = {
-        'C': [0, 0, 0],
-        'Q': [0, 0, 0],
-        'T': [0, 0, 0],
-    }
+    original = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+    ]
     numero_sets = 0
 
     for carta in range(cartas):
         linha += 1
-        n, s = linhas[linha].split(' ')
-        #n, s = input().split(' ')
-        if s[0] == 'c':
-            if   n[0] == 'u': original['C'][0] += 1
-            elif n[0] == 'd': original['C'][1] += 1
-            elif n[0] == 't': original['C'][2] += 1
-        elif s[0] == 'q':
-            if   n[0] == 'u': original['Q'][0] += 1
-            elif n[0] == 'd': original['Q'][1] += 1
-            elif n[0] == 't': original['Q'][2] += 1
-        elif s[0] == 't':
-            if   n[0] == 'u': original['T'][0] += 1
-            elif n[0] == 'd': original['T'][1] += 1
-            elif n[0] == 't': original['T'][2] += 1
+        n = linhas[linha].split(' ')
+        if n[1] == 'c':
+            if   n[0] == 'u': original[0][0] += 1
+            elif n[0] == 'd': original[0][1] += 1
+            elif n[0] == 't': original[0][2] += 1
+        elif n[1] == 'q':
+            if   n[0] == 'u': original[1][0] += 1
+            elif n[0] == 'd': original[1][1] += 1
+            elif n[0] == 't': original[1][2] += 1
+        elif n[1] == 't':
+            if   n[0] == 'u': original[2][0] += 1
+            elif n[0] == 'd': original[2][1] += 1
+            elif n[0] == 't': original[2][2] += 1
 
     
     # Analisando...
 
-    print('Original:\n', original['C'], '\n', original['Q'], '\n', original['T'], '\n',)
+    print('Original:\n', original[0], '\n', original[1], '\n', original[2], '\n',)
 
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 1\n', '-'*30)
     tentativa_1 = (
         diagonal_direita(matriz) + diagonal_esquerda(matriz) + 
         trio_repetido(matriz) + mesma_linha(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_1}\n')
 
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 2\n', '-'*30)
     tentativa_2 = (
         trio_repetido(matriz) + mesma_linha(matriz) +  
         diagonal_direita(matriz) + diagonal_esquerda(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_2}\n')
 
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 3\n', '-'*30)
     tentativa_3 = (
         mesma_linha(matriz) + diagonal_direita(matriz) + 
         diagonal_esquerda(matriz) + trio_repetido(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_3}\n')
 
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 4\n', '-'*30)
     tentativa_4 = (
         trio_repetido(matriz) + diagonal_direita(matriz) + 
         diagonal_esquerda(matriz) + mesma_linha(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_4}\n')
     
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 5\n', '-'*30)
     tentativa_5 = (
         diagonal_direita(matriz) + diagonal_esquerda(matriz) + 
         mesma_linha(matriz) + trio_repetido(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_5}\n')
     
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 6\n', '-'*30)
     tentativa_6 = (
         mesma_linha(matriz) + trio_repetido(matriz) + 
         diagonal_direita(matriz) + diagonal_esquerda(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_6}\n')
 
     # Repetindoo a parte de cima, só invertendo DIAGONAIS DIREITA e ESQUERDA
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 7\n', '-'*30)
     tentativa_7 = (
         diagonal_esquerda(matriz) + diagonal_direita(matriz) +
         trio_repetido(matriz) + mesma_linha(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_7}\n')
 
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 8\n', '-'*30)
     tentativa_8 = (
         trio_repetido(matriz) + mesma_linha(matriz) +  
         diagonal_esquerda(matriz) + diagonal_direita(matriz) +
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_8}\n')
 
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 9\n', '-'*30)
     tentativa_9 = (
         mesma_linha(matriz) + diagonal_esquerda(matriz) + 
         diagonal_direita(matriz) + trio_repetido(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_9}\n')
 
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 10\n', '-'*30)
     tentativa_10 = (
         trio_repetido(matriz) + diagonal_esquerda(matriz) + 
         diagonal_direita(matriz) + mesma_linha(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_10}\n')
     
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 11\n', '-'*30)
     tentativa_11 = (
         diagonal_esquerda(matriz) + diagonal_direita(matriz) +
         mesma_linha(matriz) + trio_repetido(matriz) + 
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_11}\n')
     
-    matriz = {k: list(v) for k, v in original.items()}
+    matriz = [list(j) for j in original]
     print('Tentativa 12\n', '-'*30)
     tentativa_12 = (
         mesma_linha(matriz) + trio_repetido(matriz) + 
         diagonal_esquerda(matriz) + diagonal_direita(matriz) +
         mesma_coluna(matriz)
     )
-    print(matriz['C'], '\n', matriz['Q'], '\n', matriz['T'])
+    print(matriz[0], '\n', matriz[1], '\n', matriz[2])
     print(f'Pontos: {tentativa_12}\n')
 
     print(cartas, ' ----> ',
@@ -369,3 +374,5 @@ while True:
         )
     )
     linha += 1
+
+print(f'Tempo total: {(time() - inicio):0.4f} segundos')
